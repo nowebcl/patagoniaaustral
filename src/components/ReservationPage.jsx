@@ -3,6 +3,117 @@ import { toursData } from '../data/toursData';
 import { translations } from '../data/translations';
 import { bookingService } from '../services/bookingService';
 
+// Executive Minimalist SVG Icons
+const Icons = {
+  ArrowLeft: () => (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M19 12H5M12 19l-7-7 7-7"/>
+    </svg>
+  ),
+  Admin: () => (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="3" width="7" height="9" rx="1" />
+      <rect x="14" y="3" width="7" height="5" rx="1" />
+      <rect x="14" y="12" width="7" height="9" rx="1" />
+      <rect x="3" y="16" width="7" height="5" rx="1" />
+    </svg>
+  ),
+  Check: ({ size = 16, strokeWidth = 3 }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="20 6 9 17 4 12" />
+    </svg>
+  ),
+  Printer: () => (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="6 9 6 2 18 2 18 9" />
+      <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+      <rect x="6" y="14" width="12" height="8" />
+    </svg>
+  ),
+  Home: () => (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+      <polyline points="9 22 9 12 15 12 15 22" />
+    </svg>
+  ),
+  CreditCard: () => (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+      <line x1="1" y1="10" x2="23" y2="10" />
+    </svg>
+  ),
+  Bank: () => (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="3" y1="21" x2="21" y2="21" />
+      <line x1="3" y1="10" x2="21" y2="10" />
+      <polyline points="5 6 12 3 19 6" />
+      <line x1="4" y1="10" x2="4" y2="21" />
+      <line x1="20" y1="10" x2="20" y2="21" />
+      <line x1="8" y1="14" x2="8" y2="17" />
+      <line x1="12" y1="14" x2="12" y2="17" />
+      <line x1="16" y1="14" x2="16" y2="17" />
+    </svg>
+  ),
+  Anchor: () => (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="5" r="3" />
+      <line x1="12" y1="22" x2="12" y2="8" />
+      <path d="M5 12H2a10 10 0 0 0 20 0h-3" />
+    </svg>
+  ),
+  WhatsApp: () => (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.971.53 1.77.813 2.796.813 3.179 0 5.766-2.587 5.767-5.766.001-3.182-2.585-5.799-5.767-5.799zm9.969 5.766c0 5.514-4.486 10-10 10-1.748 0-3.385-.45-4.821-1.238l-7.179 1.882 1.916-6.997c-.901-1.503-1.416-3.26-1.416-5.147 0-5.514 4.486-10 10-10s10 4.486 10 10z" />
+    </svg>
+  ),
+  Lock: () => (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+      <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+    </svg>
+  ),
+  Shield: () => (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+    </svg>
+  ),
+  Clock: () => (
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="10" />
+      <polyline points="12 6 12 12 16 14" />
+    </svg>
+  ),
+  MapPin: () => (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+      <circle cx="12" cy="10" r="3" />
+    </svg>
+  ),
+  Calendar: () => (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+      <line x1="16" y1="2" x2="16" y2="6" />
+      <line x1="8" y1="2" x2="8" y2="6" />
+      <line x1="3" y1="10" x2="21" y2="10" />
+    </svg>
+  ),
+  Users: () => (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+      <circle cx="9" cy="7" r="4" />
+      <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+    </svg>
+  ),
+  Info: () => (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="10" />
+      <line x1="12" y1="16" x2="12" y2="12" />
+      <line x1="12" y1="8" x2="12.01" y2="8" />
+    </svg>
+  ),
+};
+
 const ReservationPage = ({
   initialTourId = 1,
   language = 'es',
@@ -150,7 +261,8 @@ const ReservationPage = ({
                 gap: '8px',
               }}
             >
-              ← {isEs ? 'Volver al Inicio' : 'Back to Home'}
+              <Icons.ArrowLeft />
+              <span>{isEs ? 'Volver al Inicio' : 'Back to Home'}</span>
             </button>
             <img
               src="/assets/images/austral-logo-white.png"
@@ -172,9 +284,13 @@ const ReservationPage = ({
                   fontSize: '13px',
                   fontWeight: '700',
                   cursor: 'pointer',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
                 }}
               >
-                ⚙️ {isEs ? 'Ver en Panel Admin' : 'View in Admin'}
+                <Icons.Admin />
+                <span>{isEs ? 'Ver en Panel Admin' : 'View in Admin'}</span>
               </button>
             )}
           </div>
@@ -201,15 +317,13 @@ const ReservationPage = ({
                   borderRadius: '50%',
                   backgroundColor: '#dcfce7',
                   color: '#15803d',
-                  fontSize: '36px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   margin: '0 auto 16px',
-                  fontWeight: 'bold',
                 }}
               >
-                ✓
+                <Icons.Check size={32} strokeWidth={3} />
               </div>
               <span
                 style={{
@@ -376,7 +490,10 @@ const ReservationPage = ({
                 marginBottom: '28px',
               }}
             >
-              <strong>⚓ {isEs ? 'Recomendaciones Importantes de Zarpe:' : 'Sailing Boarding Instructions:'}</strong>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontWeight: '800' }}>
+                <Icons.Anchor />
+                <span>{isEs ? 'Recomendaciones Importantes de Zarpe:' : 'Sailing Boarding Instructions:'}</span>
+              </div>
               <ul style={{ margin: '8px 0 0', paddingLeft: '20px' }}>
                 <li>{isEs ? 'Presentarse con 20 minutos de anticipación al horario fijado.' : 'Arrive 20 minutes prior to scheduled departure.'}</li>
                 <li>{isEs ? 'Llevar vestimenta en capas, cortaviento impermeable y calzado cómodo.' : 'Dress in warm layers with a windbreaker jacket.'}</li>
@@ -406,7 +523,8 @@ const ReservationPage = ({
                   gap: '8px',
                 }}
               >
-                🖨️ {isEs ? 'Imprimir / Descargar Voucher' : 'Print / Download Voucher'}
+                <Icons.Printer />
+                <span>{isEs ? 'Imprimir / Descargar Voucher' : 'Print / Download Voucher'}</span>
               </button>
 
               {onNavigateToAdmin && (
@@ -424,9 +542,14 @@ const ReservationPage = ({
                     fontSize: '14px',
                     fontWeight: '700',
                     cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '8px',
                   }}
                 >
-                  ⚙️ {isEs ? 'Ver en Panel de Clientes y Reservas' : 'Manage in Admin Dashboard'}
+                  <Icons.Admin />
+                  <span>{isEs ? 'Ver en Panel de Clientes y Reservas' : 'Manage in Admin Dashboard'}</span>
                 </button>
               )}
 
@@ -444,9 +567,14 @@ const ReservationPage = ({
                   fontSize: '14px',
                   fontWeight: '700',
                   cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px',
                 }}
               >
-                🏠 {isEs ? 'Volver al Sitio Web' : 'Return to Home'}
+                <Icons.Home />
+                <span>{isEs ? 'Volver al Sitio Web' : 'Return to Home'}</span>
               </button>
             </div>
           </div>
@@ -497,13 +625,14 @@ const ReservationPage = ({
                 fontWeight: '600',
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '6px',
+                gap: '8px',
                 transition: 'background 0.2s',
               }}
               onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.2)')}
               onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.1)')}
             >
-              ← {isEs ? 'Volver al Inicio' : 'Back to Home'}
+              <Icons.ArrowLeft />
+              <span>{isEs ? 'Volver al Inicio' : 'Back to Home'}</span>
             </button>
             <a href="/" onClick={(e) => { e.preventDefault(); onBackToHome(); }}>
               <img
@@ -545,7 +674,8 @@ const ReservationPage = ({
                   gap: '6px',
                 }}
               >
-                ⚙️ {isEs ? 'Panel Admin' : 'Admin'}
+                <Icons.Admin />
+                <span>{isEs ? 'Panel Admin' : 'Admin'}</span>
               </button>
             )}
           </div>
@@ -963,25 +1093,25 @@ const ReservationPage = ({
                       id: 'WebPay / Tarjeta',
                       title: isEs ? 'WebPay Plus / Tarjetas' : 'Credit / Debit Card',
                       subtitle: isEs ? 'Crédito, Débito, Prepago' : 'Visa, Mastercard, AMEX',
-                      icon: '💳',
+                      icon: <Icons.CreditCard />,
                     },
                     {
                       id: 'Transferencia',
                       title: isEs ? 'Transferencia Bancaria' : 'Bank Transfer',
                       subtitle: isEs ? 'Banco Santander Chile' : 'Direct Electronic Wire',
-                      icon: '🏦',
+                      icon: <Icons.Bank />,
                     },
                     {
                       id: 'Efectivo / Muelle',
                       title: isEs ? 'Pago en Muelle / Oficina' : 'Pay at Pier / Office',
                       subtitle: isEs ? 'Efectivo o POS antes de zarpe' : 'Cash or Card at boarding',
-                      icon: '⚓',
+                      icon: <Icons.Anchor />,
                     },
                     {
                       id: 'Asistido WhatsApp',
                       title: isEs ? 'Asistencia WhatsApp' : 'WhatsApp Assistance',
                       subtitle: isEs ? 'Coordinar con ejecutivo' : 'Direct travel agent chat',
-                      icon: '💬',
+                      icon: <Icons.WhatsApp />,
                     },
                   ].map((m) => (
                     <label
@@ -1007,8 +1137,9 @@ const ReservationPage = ({
                         style={{ marginTop: '3px', accentColor: '#0001e2' }}
                       />
                       <div>
-                        <div style={{ fontWeight: '700', fontSize: '14px', color: '#081e2a' }}>
-                          {m.icon} {m.title}
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontWeight: '700', fontSize: '14px', color: '#081e2a' }}>
+                          <span style={{ color: '#0001e2', display: 'flex' }}>{m.icon}</span>
+                          <span>{m.title}</span>
                         </div>
                         <div style={{ fontSize: '12px', color: '#64748b', marginTop: '2px' }}>
                           {m.subtitle}
@@ -1064,7 +1195,8 @@ const ReservationPage = ({
                   onMouseEnter={(e) => !isSubmitting && (e.currentTarget.style.backgroundColor = '#0001b5')}
                   onMouseLeave={(e) => !isSubmitting && (e.currentTarget.style.backgroundColor = '#0001e2')}
                 >
-                  🔒 {isSubmitting ? (isEs ? 'Procesando Reserva...' : 'Processing...') : (isEs ? 'Confirmar Reserva de Excursión' : 'Confirm Excursion Booking')}
+                  <Icons.Lock />
+                  <span>{isSubmitting ? (isEs ? 'Procesando Reserva...' : 'Processing...') : (isEs ? 'Confirmar Reserva de Excursión' : 'Confirm Excursion Booking')}</span>
                 </button>
 
                 <button
@@ -1088,12 +1220,14 @@ const ReservationPage = ({
                   onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#20ba59')}
                   onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#25D366')}
                 >
-                  💬 {isEs ? 'O Reserva Directo con un Asistente en WhatsApp' : 'Or Book Directly with an Agent on WhatsApp'}
+                  <Icons.WhatsApp />
+                  <span>{isEs ? 'O Reserva Directo con un Asistente en WhatsApp' : 'Or Book Directly with an Agent on WhatsApp'}</span>
                 </button>
               </div>
 
-              <div style={{ textAlign: 'center', marginTop: '16px', fontSize: '12px', color: '#94a3b8' }}>
-                🛡️ {isEs ? 'Sin cobros sorpresa. Cancelación flexible hasta 24 horas antes.' : 'No hidden fees. Flexible cancellation up to 24 hours prior.'}
+              <div style={{ textAlign: 'center', marginTop: '16px', fontSize: '12px', color: '#94a3b8', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
+                <Icons.Shield />
+                <span>{isEs ? 'Sin cobros sorpresa. Cancelación flexible hasta 24 horas antes.' : 'No hidden fees. Flexible cancellation up to 24 hours prior.'}</span>
               </div>
             </form>
           </div>
@@ -1144,9 +1278,13 @@ const ReservationPage = ({
                     padding: '4px 10px',
                     borderRadius: '6px',
                     backdropFilter: 'blur(4px)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '5px',
                   }}
                 >
-                  ⏱️ {currentTour.duration}
+                  <Icons.Clock />
+                  <span>{currentTour.duration}</span>
                 </span>
               </div>
 
@@ -1170,16 +1308,25 @@ const ReservationPage = ({
                     border: '1px solid #f1f5f9',
                   }}
                 >
-                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                    <span>📍 {isEs ? 'Punto de Zarpe:' : 'Departure Point:'}</span>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: '#64748b' }}>
+                      <Icons.MapPin />
+                      <span>{isEs ? 'Punto de Zarpe:' : 'Departure Point:'}</span>
+                    </span>
                     <strong style={{ color: '#081e2a' }}>{currentTour.location}</strong>
                   </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                    <span>📅 {isEs ? 'Fecha de Viaje:' : 'Travel Date:'}</span>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: '#64748b' }}>
+                      <Icons.Calendar />
+                      <span>{isEs ? 'Fecha de Viaje:' : 'Travel Date:'}</span>
+                    </span>
                     <strong style={{ color: '#081e2a' }}>{date || minDate}</strong>
                   </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <span>👥 {isEs ? 'Pasajeros:' : 'Passengers:'}</span>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: '#64748b' }}>
+                      <Icons.Users />
+                      <span>{isEs ? 'Pasajeros:' : 'Passengers:'}</span>
+                    </span>
                     <strong style={{ color: '#081e2a' }}>
                       {adults} {isEs ? 'adultos' : 'adults'}{children > 0 ? `, ${children} ${isEs ? 'niños' : 'children'}` : ''}
                     </strong>
@@ -1227,10 +1374,19 @@ const ReservationPage = ({
                 </div>
 
                 {/* Guarantee Badges */}
-                <div style={{ fontSize: '12px', color: '#64748b', lineHeight: '1.7', borderTop: '1px solid #f1f5f9', paddingTop: '14px' }}>
-                  <div>✓ {isEs ? 'Confirmación electrónica inmediata' : 'Instant digital voucher'}</div>
-                  <div>✓ {isEs ? 'Embarcaciones certificadas por Armada de Chile' : 'Certified vessels & captains'}</div>
-                  <div>✓ {isEs ? 'Cancelación sin costo hasta 24h antes' : 'Free cancellation up to 24h before'}</div>
+                <div style={{ fontSize: '12px', color: '#64748b', lineHeight: '1.9', borderTop: '1px solid #f1f5f9', paddingTop: '14px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <span style={{ color: '#16a34a', display: 'flex' }}><Icons.Check size={14} /></span>
+                    <span>{isEs ? 'Confirmación electrónica inmediata' : 'Instant digital voucher'}</span>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <span style={{ color: '#16a34a', display: 'flex' }}><Icons.Check size={14} /></span>
+                    <span>{isEs ? 'Embarcaciones certificadas por Armada de Chile' : 'Certified vessels & captains'}</span>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <span style={{ color: '#16a34a', display: 'flex' }}><Icons.Check size={14} /></span>
+                    <span>{isEs ? 'Cancelación sin costo hasta 24h antes' : 'Free cancellation up to 24h before'}</span>
+                  </div>
                 </div>
               </div>
             </div>

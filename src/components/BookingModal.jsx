@@ -113,7 +113,10 @@ const BookingModal = ({ isOpen, onClose, selectedTour, language = 'es' }) => {
           onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#e2e8f0')}
           onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#f1f5f9')}
         >
-          ✕
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
         </button>
 
         {!isSubmitted ? (
@@ -467,8 +470,10 @@ const BookingModal = ({ isOpen, onClose, selectedTour, language = 'es' }) => {
                   onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#20ba59')}
                   onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#25D366')}
                 >
-                  <i className="icon-Vector5" style={{ display: 'none' }}></i>
-                  💬 {t.whatsappBtn}
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.971.53 1.77.813 2.796.813 3.179 0 5.766-2.587 5.767-5.766.001-3.182-2.585-5.799-5.767-5.799zm9.969 5.766c0 5.514-4.486 10-10 10-1.748 0-3.385-.45-4.821-1.238l-7.179 1.882 1.916-6.997c-.901-1.503-1.416-3.26-1.416-5.147 0-5.514 4.486-10 10-10s10 4.486 10 10z" />
+                  </svg>
+                  <span>{t.whatsappBtn}</span>
                 </button>
               </div>
 
@@ -479,9 +484,17 @@ const BookingModal = ({ isOpen, onClose, selectedTour, language = 'es' }) => {
                   textAlign: 'center',
                   marginTop: '12px',
                   marginBottom: 0,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '5px',
                 }}
               >
-                🔒 {t.secureNote}
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                </svg>
+                <span>{t.secureNote}</span>
               </p>
             </form>
           </div>
@@ -498,11 +511,12 @@ const BookingModal = ({ isOpen, onClose, selectedTour, language = 'es' }) => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                fontSize: '32px',
                 margin: '0 auto 16px',
               }}
             >
-              ✓
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
             </div>
             <h3 style={{ fontSize: '22px', fontWeight: '800', color: '#081e2a', marginBottom: '8px' }}>
               {t.successTitle}

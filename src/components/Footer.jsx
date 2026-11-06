@@ -216,14 +216,14 @@ const Footer = ({ language = 'es', onNavigateToAdmin }) => {
                     background: 'rgba(255,255,255,0.06)',
                     border: '1px solid rgba(255,255,255,0.15)',
                     color: '#94a3b8',
-                    padding: '3px 10px',
+                    padding: '4px 10px',
                     borderRadius: '6px',
                     fontSize: '11px',
                     fontWeight: '600',
                     cursor: 'pointer',
                     display: 'inline-flex',
                     alignItems: 'center',
-                    gap: '4px',
+                    gap: '6px',
                     transition: 'all 0.2s',
                   }}
                   onMouseEnter={(e) => {
@@ -235,7 +235,13 @@ const Footer = ({ language = 'es', onNavigateToAdmin }) => {
                     e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.06)';
                   }}
                 >
-                  ⚙️ {language === 'es' ? 'Portal Admin' : 'Admin Portal'}
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3" y="3" width="7" height="9" rx="1" />
+                    <rect x="14" y="3" width="7" height="5" rx="1" />
+                    <rect x="14" y="12" width="7" height="9" rx="1" />
+                    <rect x="3" y="16" width="7" height="5" rx="1" />
+                  </svg>
+                  <span>{language === 'es' ? 'Portal de Administración' : 'Admin Portal'}</span>
                 </button>
               )}
             </div>
