@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import HeroSlider from './components/HeroSlider';
 import SearchFilterBar from './components/SearchFilterBar';
@@ -16,16 +16,37 @@ import LatestNews from './components/LatestNews';
 import Newsletter from './components/Newsletter';
 import Footer from './components/Footer';
 import OffcanvasSidebar from './components/OffcanvasSidebar';
-import BookingModal from './components/BookingModal';
 import MobileBottomNav from './components/MobileBottomNav';
+import ReservationPage from './components/ReservationPage';
+import AdminDashboard from './components/AdminDashboard';
 
 function App() {
   const [language, setLanguage] = useState('es');
+  const [currentView, setCurrentView] = useState('home'); // 'home' | 'booking' | 'admin'
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const [videoUrl, setVideoUrl] = useState('https://www.youtube.com/embed/ScMzIvxBSi4');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [selectedTour, setSelectedTour] = useState(null);
+
+  // Sync view with URL Hash
+  useEffect(() => {
+    const checkHash = () => {
+      const hash = window.location.hash.toLowerCase();
+      if (hash.includes('#admin') || hash.includes('#panel')) {
+        setCurrentView('admin');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (hash.includes('#reservar') || hash.includes('#booking')) {
+        setCurrentView('booking');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (hash === '' || hash === '#' || hash === '#inicio') {
+        setCurrentView('home');
+      }
+    };
+
+    checkHash();
+    window.addEventListener('hashchange', checkHash);
+    return () => window.removeEventListener('hashchange', checkHash);
+  }, []);
 
   const handleOpenVideo = (url) => {
     if (url) setVideoUrl(url);
@@ -34,9 +55,52 @@ function App() {
 
   const handleOpenBooking = (tour = null) => {
     setSelectedTour(tour);
-    setIsBookingOpen(true);
+    setCurrentView('booking');
+    window.location.hash = '#reservar';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleNavigateToAdmin = () => {
+    setCurrentView('admin');
+    window.location.hash = '#admin';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleBackToHome = () => {
+    setCurrentView('home');
+    window.history.pushState(null, '', window.location.pathname);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // --------------------------------------------------
+  // FULL PAGE: ADMIN DASHBOARD
+  // --------------------------------------------------
+  if (currentView === 'admin') {
+    return (
+      <AdminDashboard
+        onBackToHome={handleBackToHome}
+        onOpenPublicBooking={() => handleOpenBooking(null)}
+      />
+    );
+  }
+
+  // --------------------------------------------------
+  // FULL PAGE: RESERVATION EXPERIENCE (NOT A POPUP)
+  // --------------------------------------------------
+  if (currentView === 'booking') {
+    return (
+      <ReservationPage
+        initialTourId={selectedTour?.id || 1}
+        language={language}
+        onBackToHome={handleBackToHome}
+        onNavigateToAdmin={handleNavigateToAdmin}
+      />
+    );
+  }
+
+  // --------------------------------------------------
+  // FULL PAGE: MAIN HOMEPAGE & TOUR CATALOG
+  // --------------------------------------------------
   return (
     <>
       <div id="top" />
@@ -45,6 +109,7 @@ function App() {
           <Header
             onOpenSidebar={() => setIsSidebarOpen(true)}
             onOpenBooking={() => handleOpenBooking(null)}
+            onNavigateToAdmin={handleNavigateToAdmin}
             language={language}
             onLanguageChange={(newLang) => setLanguage(newLang)}
           />
@@ -100,7 +165,10 @@ function App() {
               language={language}
             />
           </main>
-          <Footer language={language} />
+          <Footer
+            language={language}
+            onNavigateToAdmin={handleNavigateToAdmin}
+          />
         </div>
       </div>
 
@@ -108,20 +176,13 @@ function App() {
         isOpen={isSidebarOpen}
         onClose={() => setIsSidebarOpen(false)}
         onOpenBooking={() => handleOpenBooking(null)}
+        onNavigateToAdmin={handleNavigateToAdmin}
         language={language}
       />
 
       {/* Mobile App Bottom Navigation */}
       <MobileBottomNav
         onOpenBooking={() => handleOpenBooking(null)}
-        language={language}
-      />
-
-      {/* Minimalist Booking Modal */}
-      <BookingModal
-        isOpen={isBookingOpen}
-        onClose={() => setIsBookingOpen(false)}
-        selectedTour={selectedTour}
         language={language}
       />
 

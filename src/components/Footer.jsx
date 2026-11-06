@@ -1,7 +1,7 @@
 import React from 'react';
 import { translations } from '../data/translations';
 
-const Footer = ({ language = 'es' }) => {
+const Footer = ({ language = 'es', onNavigateToAdmin }) => {
   const t = translations[language] || translations.es;
 
   return (
@@ -203,10 +203,42 @@ const Footer = ({ language = 'es' }) => {
           </div>
 
           {/* Bottom Bar */}
-          <div className="footer-bottom flex-two" style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '20px', paddingBottom: '20px' }}>
-            <p style={{ color: '#94a3b8', fontSize: '13px', margin: 0 }}>
-              &copy; 2026 {t.footer.copyright}
-            </p>
+          <div className="footer-bottom flex-two" style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '20px', paddingBottom: '20px', flexWrap: 'wrap', gap: '14px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
+              <p style={{ color: '#94a3b8', fontSize: '13px', margin: 0 }}>
+                &copy; 2026 {t.footer.copyright}
+              </p>
+              {onNavigateToAdmin && (
+                <button
+                  type="button"
+                  onClick={onNavigateToAdmin}
+                  style={{
+                    background: 'rgba(255,255,255,0.06)',
+                    border: '1px solid rgba(255,255,255,0.15)',
+                    color: '#94a3b8',
+                    padding: '3px 10px',
+                    borderRadius: '6px',
+                    fontSize: '11px',
+                    fontWeight: '600',
+                    cursor: 'pointer',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '4px',
+                    transition: 'all 0.2s',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = '#ffffff';
+                    e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.12)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = '#94a3b8';
+                    e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.06)';
+                  }}
+                >
+                  ⚙️ {language === 'es' ? 'Portal Admin' : 'Admin Portal'}
+                </button>
+              )}
+            </div>
             <ul className="social-footer flex-three" style={{ gap: '15px' }}>
               <li>
                 <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style={{ color: '#fff', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>

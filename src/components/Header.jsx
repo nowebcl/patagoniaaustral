@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { translations } from '../data/translations';
 
-const Header = ({ onOpenSidebar, onOpenBooking, language = 'es', onLanguageChange }) => {
+const Header = ({ onOpenSidebar, onOpenBooking, onNavigateToAdmin, language = 'es', onLanguageChange }) => {
   const [isSticky, setIsSticky] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -99,6 +99,31 @@ const Header = ({ onOpenSidebar, onOpenBooking, language = 'es', onLanguageChang
                   <span>{t.bookingNow}</span>
                 </button>
 
+                {onNavigateToAdmin && (
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      onNavigateToAdmin();
+                    }}
+                    style={{
+                      border: 'none',
+                      background: 'none',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '5px',
+                      color: '#475569',
+                      fontWeight: '600',
+                      fontSize: '13px',
+                      marginLeft: '12px',
+                    }}
+                  >
+                    <span>⚙️</span>
+                    <span>Admin</span>
+                  </button>
+                )}
+
                 <div className="follow-social flex-two" style={{ alignItems: 'center', gap: '8px' }}>
                   <span>{t.followUs}</span>
                   <ul className="flex-two" style={{ margin: 0, padding: 0, listStyle: 'none' }}>
@@ -190,6 +215,20 @@ const Header = ({ onOpenSidebar, onOpenBooking, language = 'es', onLanguageChang
                             <li>
                               <a href="#destinos">{t.nav.destinations}</a>
                             </li>
+                            {onNavigateToAdmin && (
+                              <li>
+                                <a
+                                  href="#admin"
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    onNavigateToAdmin();
+                                  }}
+                                  style={{ color: '#0001e2', fontWeight: '700' }}
+                                >
+                                  ⚙️ Admin
+                                </a>
+                              </li>
+                            )}
                           </ul>
                         </div>
                       </nav>
@@ -564,6 +603,33 @@ const Header = ({ onOpenSidebar, onOpenBooking, language = 'es', onLanguageChang
               >
                 💬 WhatsApp Directo
               </a>
+
+              {onNavigateToAdmin && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    onNavigateToAdmin();
+                  }}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '8px',
+                    backgroundColor: 'rgba(255,255,255,0.08)',
+                    color: '#cbd5e1',
+                    border: '1px solid rgba(255,255,255,0.15)',
+                    padding: '11px',
+                    borderRadius: '10px',
+                    fontWeight: '600',
+                    fontSize: '13px',
+                    cursor: 'pointer',
+                    marginTop: '4px',
+                  }}
+                >
+                  ⚙️ {language === 'es' ? 'Panel de Administración' : 'Admin Panel'}
+                </button>
+              )}
             </div>
           </nav>
         </div>

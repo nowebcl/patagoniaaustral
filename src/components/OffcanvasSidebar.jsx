@@ -1,7 +1,7 @@
 import React from 'react';
 import { translations } from '../data/translations';
 
-const OffcanvasSidebar = ({ isOpen, onClose, onOpenBooking, language = 'es' }) => {
+const OffcanvasSidebar = ({ isOpen, onClose, onOpenBooking, onNavigateToAdmin, language = 'es' }) => {
   const t = translations[language] || translations.es;
 
   return (
@@ -69,11 +69,39 @@ const OffcanvasSidebar = ({ isOpen, onClose, onOpenBooking, language = 'es' }) =
               fontWeight: '700',
               fontSize: '14px',
               cursor: 'pointer',
-              marginBottom: '24px',
+              marginBottom: '12px',
             }}
           >
             {t.bookingNow}
           </button>
+
+          {onNavigateToAdmin && (
+            <button
+              type="button"
+              onClick={() => {
+                onClose();
+                onNavigateToAdmin();
+              }}
+              style={{
+                width: '100%',
+                backgroundColor: '#f8fafc',
+                color: '#081e2a',
+                border: '1px solid #cbd5e1',
+                padding: '10px',
+                borderRadius: '8px',
+                fontWeight: '600',
+                fontSize: '13px',
+                cursor: 'pointer',
+                marginBottom: '24px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '8px',
+              }}
+            >
+              ⚙️ {language === 'es' ? 'Panel de Administración' : 'Admin Panel'}
+            </button>
+          )}
 
           <ul className="canvas-info" style={{ listStyle: 'none', padding: 0, margin: '0 0 24px' }}>
             <li className="flex-three" style={{ marginBottom: '14px', gap: '10px' }}>
